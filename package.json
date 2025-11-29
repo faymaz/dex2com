@@ -4,6 +4,9 @@
   "description": "Synchronize glucose data between Dexcom Share accounts across different regions. Enables cross-region glucose monitoring for diabetes management apps like Omnipod 5 that require specific regional servers.",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "dex2com": "./index.js"
+  },
   "scripts": {
     "start": "node index.js",
     "sync": "node index.js --once",
@@ -18,6 +21,14 @@
   ],
   "author": "faymaz",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faymaz/dex2com.git"
+  },
+  "bugs": {
+    "url": "https://github.com/faymaz/dex2com/issues"
+  },
+  "homepage": "https://github.com/faymaz/dex2com#readme",
   "engines": {
     "node": ">=18.0.0"
   },
