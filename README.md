@@ -1,5 +1,7 @@
 # Dex2Com
 
+![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=faymaz.dex2com)
+
 Synchronize glucose data between Dexcom Share accounts across different regions.
 
 ## Why This Project Exists
