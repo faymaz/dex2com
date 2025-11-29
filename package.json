@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "dex2com": "./index.js"
+    "dex2com": "index.js"
   },
   "scripts": {
     "start": "node index.js",
