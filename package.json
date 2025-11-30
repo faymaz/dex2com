@@ -1,12 +1,18 @@
 {
   "name": "dex2com",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Synchronize glucose data between Dexcom Share accounts across different regions. Enables cross-region glucose monitoring for diabetes management apps like Omnipod 5 that require specific regional servers.",
   "main": "index.js",
   "type": "module",
   "bin": {
     "dex2com": "index.js"
   },
+  "files": [
+    "index.js",
+    "src/",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "start": "node index.js",
     "sync": "node index.js --once",
