@@ -147,12 +147,18 @@ class DexcomClient {
 
       if (response.status === 500) {
         const error = response.json();
-        if (error && error.Code === 'SessionIdNotFound') {
+        const errorMessage = error?.Message || 'Unknown';
+        const isSessionError = error?.Code === 'SessionIdNotFound' ||
+                               errorMessage.includes('Session not active') ||
+                               errorMessage.includes('timed out');
+
+        if (isSessionError) {
           this.sessionId = null;
+          this.accountId = null;
           await this.authenticate();
           return this.readGlucoseValues(minutes, maxCount);
         }
-        throw new Error(`Server error: ${error?.Message || 'Unknown'}`);
+        throw new Error(`Server error: ${errorMessage}`);
       }
 
       if (!response.ok) {
@@ -166,7 +172,11 @@ class DexcomClient {
 
       return readings;
     } catch (error) {
-      if (error.message.includes('SessionIdNotFound')) {
+      const isSessionError = error.message.includes('SessionIdNotFound') ||
+                             error.message.includes('Session not active') ||
+                             error.message.includes('timed out');
+
+      if (isSessionError) {
         this.sessionId = null;
         this.accountId = null;
         await this.authenticate();
@@ -201,12 +211,18 @@ class DexcomClient {
 
       if (response.status === 500) {
         const error = response.json();
-        if (error && error.Code === 'SessionIdNotFound') {
+        const errorMessage = error?.Message || response.text();
+        const isSessionError = error?.Code === 'SessionIdNotFound' ||
+                               errorMessage.includes('Session not active') ||
+                               errorMessage.includes('timed out');
+
+        if (isSessionError) {
           this.sessionId = null;
+          this.accountId = null;
           await this.authenticate();
           return this.writeGlucoseValues(serialNumber, egvs);
         }
-        throw new Error(`Server error: ${error?.Message || response.text()}`);
+        throw new Error(`Server error: ${errorMessage}`);
       }
 
       if (!response.ok) {
@@ -215,7 +231,11 @@ class DexcomClient {
 
       return true;
     } catch (error) {
-      if (error.message.includes('SessionIdNotFound')) {
+      const isSessionError = error.message.includes('SessionIdNotFound') ||
+                             error.message.includes('Session not active') ||
+                             error.message.includes('timed out');
+
+      if (isSessionError) {
         this.sessionId = null;
         this.accountId = null;
         await this.authenticate();

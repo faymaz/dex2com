@@ -18,6 +18,7 @@ While originally built for the Omnipod 5 use case, this tool can be used by anyo
 - Support for US, EU/OUS, and JP Dexcom regions
 - Automatic duplicate filtering to prevent data redundancy
 - Daemon mode for continuous background synchronization
+- Automatic session renewal on timeout for uninterrupted sync
 - Connection testing to verify account credentials
 - Configurable sync intervals and data limits
 - Zero dependencies beyond the standard Node.js runtime
@@ -182,6 +183,13 @@ Dex2Com v1.0.0 - Dexcom Share Account Sync
 - Ensure Share is enabled on the destination account
 - Run `node index.js --test` to verify both connections work
 - Check the logs for any error messages during sync
+
+### Session Timeout Errors
+
+If you see "Session not active or timed out" errors in logs:
+- The application will automatically detect and renew expired sessions
+- No manual intervention required - the sync will resume automatically
+- If errors persist, verify your credentials are still valid
 
 ## Technical Details
 
