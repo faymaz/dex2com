@@ -106,6 +106,15 @@ node index.js --daemon
 # or
 npm run daemon
 ```
+### Verify Mode
+
+Verify that glucose values are synchronized correctly:
+
+```bash
+node index.js --verify
+# or
+npm run verify
+```
 
 ### Running as a System Service
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
 import Dex2ComSyncer from './src/syncer.js';
 
 // Parse command line arguments
