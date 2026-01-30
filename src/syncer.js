@@ -62,7 +62,7 @@ class Dex2ComSyncer {
     try {
       this.log('info', `Starting sync from ${this.config.source.region.toUpperCase()} to ${this.config.dest.region.toUpperCase()}`);
 
-      // Read from source
+     
       const minutes = this.config.syncIntervalMinutes * 3 || 15;
       const maxCount = this.config.maxReadingsPerSync || 12;
 
@@ -77,7 +77,7 @@ class Dex2ComSyncer {
 
       this.log('info', `Read ${readings.length} readings from source`);
 
-      // Filter out already synced readings
+     
       const newReadings = readings.filter(reading => {
         const timestamp = this.extractTimestamp(reading.WT);
         return !this.syncedTimestamps.has(timestamp);
@@ -93,7 +93,7 @@ class Dex2ComSyncer {
 
       this.log('info', `${newReadings.length} new readings to sync`);
 
-      // Format readings for upload
+     
       const egvs = newReadings.map(reading => ({
         Trend: reading.Trend,
         ST: reading.ST,
@@ -101,17 +101,17 @@ class Dex2ComSyncer {
         Value: reading.Value
       }));
 
-      // Write to destination
+     
       await this.destClient.writeGlucoseValues(this.serialNumber, egvs);
       result.writeCount = egvs.length;
 
-      // Mark as synced
+     
       newReadings.forEach(reading => {
         const timestamp = this.extractTimestamp(reading.WT);
         this.syncedTimestamps.add(timestamp);
       });
 
-      // Cleanup old timestamps (keep last 24 hours)
+     
       this.cleanupOldTimestamps();
 
       this.lastSyncTime = new Date();
@@ -119,7 +119,7 @@ class Dex2ComSyncer {
 
       this.log('info', `Successfully synced ${result.writeCount} readings`);
 
-      // Log latest reading info
+     
       const latest = newReadings[0];
       const latestTime = new Date(this.extractTimestamp(latest.WT));
       this.log('info', `Latest: ${latest.Value} mg/dL (${latest.Trend}) at ${latestTime.toLocaleTimeString()}`);
@@ -157,7 +157,7 @@ class Dex2ComSyncer {
     this.log('info', `Starting Dex2Com daemon (interval: ${intervalMinutes} minutes)`);
     this.log('info', `Source: ${this.config.source.region.toUpperCase()} -> Destination: ${this.config.dest.region.toUpperCase()}`);
 
-    // Register receiver on destination
+   
     try {
       await this.destClient.registerReceiver(this.serialNumber);
       this.log('info', `Registered receiver: ${this.serialNumber}`);
@@ -165,10 +165,10 @@ class Dex2ComSyncer {
       this.log('warn', `Could not register receiver: ${error.message}`);
     }
 
-    // Initial sync
+   
     await this.sync();
 
-    // Set up interval
+   
     const intervalMs = intervalMinutes * 60 * 1000;
 
     setInterval(async () => {
@@ -188,7 +188,7 @@ class Dex2ComSyncer {
       dest: { success: false, error: null }
     };
 
-    // Test source
+   
     try {
       await this.sourceClient.authenticate();
       const reading = await this.sourceClient.getLatestReading();
@@ -200,7 +200,7 @@ class Dex2ComSyncer {
       this.log('error', `Source connection failed: ${error.message}`);
     }
 
-    // Test destination
+   
     try {
       await this.destClient.authenticate();
       results.dest.success = true;
