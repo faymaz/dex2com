@@ -41,7 +41,9 @@ function validateConfig() {
   if (missing.length > 0) {
     console.error('Missing required environment variables:');
     missing.forEach(name => console.error(`  - ${name}`));
-    console.error('\nPlease copy .env.example to .env and fill in your credentials.');
+    console.error('\nPlease configure your credentials using one of these methods:');
+    console.error('  1. Copy .env.example to .env and fill in your credentials');
+    console.error('  2. Edit ecosystem.config.js and run with: pm2 start ecosystem.config.js');
     process.exit(1);
   }
 }
@@ -65,18 +67,19 @@ Environment Variables:
   SYNC_INTERVAL_MINUTES, MAX_READINGS_PER_SYNC
 
 Example:
-  # Copy and edit configuration
+  # Option 1: Using .env file
   cp .env.example .env
   nano .env
-
-  # Test connections
-  node index.js --test
-
-  # Run once
-  node index.js --once
-
-  # Run as daemon
   node index.js --daemon
+
+  # Option 2: Using PM2 with ecosystem.config.js
+  nano ecosystem.config.js
+  pm2 start ecosystem.config.js
+
+Commands:
+  node index.js --test    Test connections
+  node index.js --once    Run single sync
+  node index.js --daemon  Run continuous sync
 `);
 }
 

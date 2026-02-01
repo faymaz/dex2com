@@ -10,6 +10,8 @@
   "files": [
     "index.js",
     "src/",
+    ".env.example",
+    "ecosystem.config.example.js",
     "LICENSE",
     "README.md"
   ],
@@ -21,9 +23,15 @@
   "keywords": [
     "dexcom",
     "glucose",
+    "jsdexcom",
+    "dexcom-share",
     "cgm",
     "diabetes",
-    "sync"
+    "health",
+    "medical",
+    "sync",
+    "share",
+    "mirror"
   ],
   "author": "faymaz",
   "license": "MIT",
