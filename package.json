@@ -11,7 +11,7 @@
     "index.js",
     "src/",
     ".env.example",
-    "ecosystem.config.example.js",
+    "ecosystem.config.example.cjs",
     "LICENSE",
     "README.md"
   ],

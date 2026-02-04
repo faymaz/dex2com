@@ -30,9 +30,9 @@ module.exports = {
 };
 
 // Usage:
-// 1. Copy this file: cp ecosystem.config.example.js ecosystem.config.js
-// 2. Edit ecosystem.config.js with your credentials
-// 3. Start with PM2: pm2 start ecosystem.config.js
+// 1. Copy this file: cp ecosystem.config.example.cjs ecosystem.config.cjs
+// 2. Edit ecosystem.config.cjs with your credentials
+// 3. Start with PM2: pm2 start ecosystem.config.cjs
 //
 // PM2 Commands:
 // pm2 logs dex2com     - View logs

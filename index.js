@@ -43,7 +43,7 @@ function validateConfig() {
     missing.forEach(name => console.error(`  - ${name}`));
     console.error('\nPlease configure your credentials using one of these methods:');
     console.error('  1. Copy .env.example to .env and fill in your credentials');
-    console.error('  2. Edit ecosystem.config.js and run with: pm2 start ecosystem.config.js');
+    console.error('  2. Edit ecosystem.config.cjs and run with: pm2 start ecosystem.config.cjs');
     process.exit(1);
   }
 }
@@ -72,9 +72,9 @@ Example:
   nano .env
   node index.js --daemon
 
-  # Option 2: Using PM2 with ecosystem.config.js
-  nano ecosystem.config.js
-  pm2 start ecosystem.config.js
+  # Option 2: Using PM2 with ecosystem.config.cjs
+  nano ecosystem.config.cjs
+  pm2 start ecosystem.config.cjs
 
 Commands:
   node index.js --test    Test connections
